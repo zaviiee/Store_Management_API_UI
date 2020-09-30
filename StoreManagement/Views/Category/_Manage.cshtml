@@ -1,0 +1,103 @@
+﻿@model StoreManagement.Models.CategoryModel
+
+@{
+    var strHeaderName = "Add";
+    if (Model.Mode.Equals("M", StringComparison.InvariantCultureIgnoreCase))
+    {
+        strHeaderName = "Modify";
+    }
+    else if (Model.Mode.Equals("D", StringComparison.InvariantCultureIgnoreCase))
+    {
+        strHeaderName = "Delete";
+    }
+
+    strHeaderName += " " + "Category";
+}
+
+<div class="row sub-header">
+    <h3>@strHeaderName</h3>
+</div>
+<div class="row">
+    <button class="btn btn-info pull-left clsManageCategories">
+        <span class="glyphicon glyphicon-backward"></span> Manage Catagories
+    </button>
+</div>
+<div class="row clearfix">
+    <form id="frmManageCategory">
+
+        @Html.HiddenFor(x => x.Mode)
+        @Html.HiddenFor(x => x.ID)
+
+        <table class="center">
+            @if (!Model.Mode.Equals("A", StringComparison.InvariantCultureIgnoreCase))
+            {
+                <tr>
+                    <td>
+                        Category ID
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.ID, new { @disabled = "disabled", @class = "form-control" })
+                    </td>
+                </tr>
+            }
+            @if (Model.Mode.Equals("D", StringComparison.InvariantCultureIgnoreCase))
+            {
+                <tr>
+                    <td>
+                        Category
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.Category_Name, new { @class = "form-control", @disabled = "disabled" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(x => x.Category_Name)
+                    </td>
+                </tr>
+            }
+            else
+            {
+
+                <tr>
+                    <td>
+                        Category
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.Category_Name, new { @class = "form-control" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(x => x.Category_Name)
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td>
+                </td>
+                <td>
+                    @if (Model.Mode.Equals("D", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        <button id="btnManageCategory" class="btn btn-info pull-left">
+                            <span class="glyphicon glyphicon-remove-circle"></span> Delete
+                        </button>
+                    }
+                    else
+                    {
+                        <button id="btnManageCategory" class="btn btn-info pull-left">
+                            <span class="glyphicon glyphicon-save"></span> Save
+                        </button>
+                    }
+                    <button class="btn btn-info pull-left clsManageCategories">
+                        <span class="glyphicon glyphicon-remove"></span> Cancel
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

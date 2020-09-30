@@ -1,0 +1,189 @@
+﻿@model StoreManagement.Models.ProductModel
+
+@{
+    var strHeaderName = "Add";
+    if (Model.Mode.Equals("M", StringComparison.InvariantCultureIgnoreCase))
+    {
+        strHeaderName = "Modify";
+    }
+    else if (Model.Mode.Equals("D", StringComparison.InvariantCultureIgnoreCase))
+    {
+        strHeaderName = "Delete";
+    }
+
+    strHeaderName += " " + "Product";
+}
+
+<div class="row sub-header">
+    <h3>@strHeaderName</h3>
+</div>
+<div class="row">
+    <button class="btn btn-info pull-left clsManageProducts">
+        <span class="glyphicon glyphicon-backward"></span> Manage Products
+    </button>
+</div>
+<div class="row clearfix">
+    <form id="frmManageProduct">
+
+        @Html.HiddenFor(x => x.Mode)
+        @Html.HiddenFor(x => x.ID)
+
+        <table class="center">
+            @if (!Model.Mode.Equals("A", StringComparison.InvariantCultureIgnoreCase))
+            {
+                <tr>
+                    <td>
+                        Product ID
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.ID, new { @disabled = "disabled", @class = "form-control" })
+                    </td>
+                </tr>
+            }
+            @if (Model.Mode.Equals("D", StringComparison.InvariantCultureIgnoreCase))
+            {
+                <tr>
+                    <td>
+                        Product Name
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.Prod_Name, new { @class = "form-control", @disabled = "disabled" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Category
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.Category_Name, new { @class = "form-control", @disabled = "disabled" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Price
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.Price, new { @class = "form-control", @disabled = "disabled" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Currency
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.Currency_Name, new { @class = "form-control", @disabled = "disabled" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Unit
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.Unit_Name, new { @class = "form-control", @disabled = "disabled" })
+                    </td>
+                </tr>
+            }
+            else
+            {
+
+                <tr>
+                    <td>
+                        Product Name
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.Prod_Name, new { @class = "form-control" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(x => x.Prod_Name)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Category
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(x => x.Category_ID, Model.Categories, new { @class = "form-control" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(x => x.Category_ID)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Price
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.Price, new { @class = "form-control", @min = "0.00", @step = "0.01", @type = "number" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(x => x.Price)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Currency
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(x => x.Currency_ID, Model.Currencies, new { @class = "form-control" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(x => x.Currency_ID)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Unit
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(x => x.Unit_ID, Model.Units, new { @class = "form-control" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(x => x.Unit_ID)
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td>
+                </td>
+                <td>
+                    @if (Model.Mode.Equals("D", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        <button id="btnManageProduct" class="btn btn-info pull-left">
+                            <span class="glyphicon glyphicon-remove-circle"></span> Delete
+                        </button>
+                    }
+                    else
+                    {
+                        <button id="btnManageProduct" class="btn btn-info pull-left">
+                            <span class="glyphicon glyphicon-save"></span> Save
+                        </button>
+                    }
+                    <button class="btn btn-info pull-left clsManageProducts">
+                        <span class="glyphicon glyphicon-remove"></span> Cancel
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+

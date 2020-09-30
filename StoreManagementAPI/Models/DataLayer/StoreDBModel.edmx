@@ -1,0 +1,457 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="StoreDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category_Name" Type="varchar" MaxLength="200" />
+          <Property Name="Last_Edit" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Currency_Name" Type="varchar" MaxLength="100" />
+          <Property Name="Currency_Abbr" Type="varchar" MaxLength="20" />
+          <Property Name="Last_Edit" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_Name" Type="varchar" MaxLength="200" />
+          <Property Name="CategoryXID" Type="int" />
+          <Property Name="UnitXID" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="CurrencyXID" Type="int" />
+          <Property Name="Last_Edit" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Units">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Unit_Name" Type="varchar" MaxLength="200" />
+          <Property Name="Last_Edit" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__Product__Categor__1AD3FDA4">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CategoryXID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__Currenc__1CBC4616">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CurrencyXID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__UnitXID__1BC821DD">
+          <End Role="Units" Type="Self.Units" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="UnitXID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="CreateCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Category_Name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="CreateProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Product_Name" Type="varchar" Mode="In" />
+          <Parameter Name="CategoryXID" Type="int" Mode="In" />
+          <Parameter Name="UnitXID" Type="int" Mode="In" />
+          <Parameter Name="Price" Type="decimal" Mode="In" />
+          <Parameter Name="CurrencyXID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAllCategories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllCurrencies" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllProducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllUnits" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="Category_Name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="Product_Name" Type="varchar" Mode="In" />
+          <Parameter Name="CategoryXID" Type="int" Mode="In" />
+          <Parameter Name="UnitXID" Type="int" Mode="In" />
+          <Parameter Name="Price" Type="decimal" Mode="In" />
+          <Parameter Name="CurrencyXID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="StoreDBModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Units" EntityType="Self.Units" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Product__Categor__1AD3FDA4" Association="Self.FK__Product__Categor__1AD3FDA4">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__Currenc__1CBC4616" Association="Self.FK__Product__Currenc__1CBC4616">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__UnitXID__1BC821DD" Association="Self.FK__Product__UnitXID__1BC821DD">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StoreDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category_Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Edit" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__Categor__1AD3FDA4" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Currency_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Currency_Abbr" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Edit" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__Currenc__1CBC4616" FromRole="Currency" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryXID" Type="Int32" />
+          <Property Name="UnitXID" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="CurrencyXID" Type="Int32" />
+          <Property Name="Last_Edit" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Product__Categor__1AD3FDA4" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Currency" Relationship="Self.FK__Product__Currenc__1CBC4616" FromRole="Product" ToRole="Currency" />
+          <NavigationProperty Name="Unit" Relationship="Self.FK__Product__UnitXID__1BC821DD" FromRole="Product" ToRole="Units" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Unit_Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Edit" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__UnitXID__1BC821DD" FromRole="Units" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK__Product__Categor__1AD3FDA4">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CategoryXID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__Currenc__1CBC4616">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CurrencyXID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__UnitXID__1BC821DD">
+          <End Role="Units" Type="Self.Unit" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="UnitXID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StoreDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Currencies" EntityType="Self.Currency" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Units" EntityType="Self.Unit" />
+          <AssociationSet Name="FK__Product__Categor__1AD3FDA4" Association="Self.FK__Product__Categor__1AD3FDA4">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__Currenc__1CBC4616" Association="Self.FK__Product__Currenc__1CBC4616">
+            <End Role="Currency" EntitySet="Currencies" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__UnitXID__1BC821DD" Association="Self.FK__Product__UnitXID__1BC821DD">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <FunctionImport Name="CreateCategory" ReturnType="Collection(Decimal)">
+            <Parameter Name="Category_Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CreateProduct" ReturnType="Collection(Decimal)">
+            <Parameter Name="Product_Name" Mode="In" Type="String" />
+            <Parameter Name="CategoryXID" Mode="In" Type="Int32" />
+            <Parameter Name="UnitXID" Mode="In" Type="Int32" />
+            <Parameter Name="Price" Mode="In" Type="Decimal" />
+            <Parameter Name="CurrencyXID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteCategory" ReturnType="Collection(Int32)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteProduct" ReturnType="Collection(Int32)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllCategories" ReturnType="Collection(StoreDBModel.GetAllCategories_Result)" />
+          <FunctionImport Name="GetAllCurrencies" ReturnType="Collection(StoreDBModel.GetAllCurrencies_Result)" />
+          <FunctionImport Name="GetAllProducts" ReturnType="Collection(StoreDBModel.GetAllProducts_Result)" />
+          <FunctionImport Name="GetAllUnits" ReturnType="Collection(StoreDBModel.GetAllUnits_Result)" />
+          <FunctionImport Name="GetCategory" ReturnType="Collection(StoreDBModel.GetCategory_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetProduct" ReturnType="Collection(StoreDBModel.GetProduct_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateCategory" ReturnType="Collection(Int32)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="Category_Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateProduct" ReturnType="Collection(Int32)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="Product_Name" Mode="In" Type="String" />
+            <Parameter Name="CategoryXID" Mode="In" Type="Int32" />
+            <Parameter Name="UnitXID" Mode="In" Type="Int32" />
+            <Parameter Name="Price" Mode="In" Type="Decimal" />
+            <Parameter Name="CurrencyXID" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetAllCategories_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Category_Name" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="In_Use" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAllCurrencies_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Currency_Name" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="GetAllProducts_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Product_Name" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="Category_ID" Nullable="false" />
+          <Property Type="String" Name="Category_Name" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="Unit_ID" Nullable="false" />
+          <Property Type="String" Name="Unit_Name" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="Currency_ID" Nullable="false" />
+          <Property Type="String" Name="Currency_Name" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="Price" Nullable="true" Precision="10" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="GetAllUnits_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Unit_Name" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="GetCategory_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Category_Name" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="In_Use" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetProduct_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Product_Name" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="Category_ID" Nullable="false" />
+          <Property Type="String" Name="Category_Name" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="Unit_ID" Nullable="false" />
+          <Property Type="String" Name="Unit_Name" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="Currency_ID" Nullable="false" />
+          <Property Type="String" Name="Currency_Name" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="Price" Nullable="true" Precision="10" Scale="2" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StoreDBModelStoreContainer" CdmEntityContainer="StoreDBEntities">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="StoreDBModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
+                <ScalarProperty Name="Last_Edit" ColumnName="Last_Edit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Currencies">
+            <EntityTypeMapping TypeName="StoreDBModel.Currency">
+              <MappingFragment StoreEntitySet="Currency">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Currency_Name" ColumnName="Currency_Name" />
+                <ScalarProperty Name="Currency_Abbr" ColumnName="Currency_Abbr" />
+                <ScalarProperty Name="Last_Edit" ColumnName="Last_Edit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="StoreDBModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="CategoryXID" ColumnName="CategoryXID" />
+                <ScalarProperty Name="UnitXID" ColumnName="UnitXID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CurrencyXID" ColumnName="CurrencyXID" />
+                <ScalarProperty Name="Last_Edit" ColumnName="Last_Edit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Units">
+            <EntityTypeMapping TypeName="StoreDBModel.Unit">
+              <MappingFragment StoreEntitySet="Units">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Unit_Name" ColumnName="Unit_Name" />
+                <ScalarProperty Name="Last_Edit" ColumnName="Last_Edit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CreateCategory" FunctionName="StoreDBModel.Store.CreateCategory" />
+          <FunctionImportMapping FunctionImportName="CreateProduct" FunctionName="StoreDBModel.Store.CreateProduct" />
+          <FunctionImportMapping FunctionImportName="DeleteCategory" FunctionName="StoreDBModel.Store.DeleteCategory" />
+          <FunctionImportMapping FunctionImportName="DeleteProduct" FunctionName="StoreDBModel.Store.DeleteProduct" />
+          <FunctionImportMapping FunctionImportName="GetAllCategories" FunctionName="StoreDBModel.Store.GetAllCategories">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StoreDBModel.GetAllCategories_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
+                <ScalarProperty Name="In_Use" ColumnName="In_Use" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllCurrencies" FunctionName="StoreDBModel.Store.GetAllCurrencies">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StoreDBModel.GetAllCurrencies_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Currency_Name" ColumnName="Currency_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllProducts" FunctionName="StoreDBModel.Store.GetAllProducts">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StoreDBModel.GetAllProducts_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
+                <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
+                <ScalarProperty Name="Unit_ID" ColumnName="Unit_ID" />
+                <ScalarProperty Name="Unit_Name" ColumnName="Unit_Name" />
+                <ScalarProperty Name="Currency_ID" ColumnName="Currency_ID" />
+                <ScalarProperty Name="Currency_Name" ColumnName="Currency_Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllUnits" FunctionName="StoreDBModel.Store.GetAllUnits">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StoreDBModel.GetAllUnits_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Unit_Name" ColumnName="Unit_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCategory" FunctionName="StoreDBModel.Store.GetCategory">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StoreDBModel.GetCategory_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
+                <ScalarProperty Name="In_Use" ColumnName="In_Use" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetProduct" FunctionName="StoreDBModel.Store.GetProduct">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StoreDBModel.GetProduct_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
+                <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
+                <ScalarProperty Name="Unit_ID" ColumnName="Unit_ID" />
+                <ScalarProperty Name="Unit_Name" ColumnName="Unit_Name" />
+                <ScalarProperty Name="Currency_ID" ColumnName="Currency_ID" />
+                <ScalarProperty Name="Currency_Name" ColumnName="Currency_Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateCategory" FunctionName="StoreDBModel.Store.UpdateCategory" />
+          <FunctionImportMapping FunctionImportName="UpdateProduct" FunctionName="StoreDBModel.Store.UpdateProduct" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

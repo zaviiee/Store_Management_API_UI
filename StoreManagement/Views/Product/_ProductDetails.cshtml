@@ -1,0 +1,50 @@
+﻿@model List<StoreManagement.Models.Product>
+
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Price</th>
+            <th scope="col">Currency</th>
+            <th scope="col">Unit</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody class="clsProductFilter">
+        @foreach (var product in Model)
+        {
+        <tr search-field="@product.Prod_Name">
+            <th scope="row">@product.ID</th>
+            <td>@product.Prod_Name</td>
+            <td>@product.Category_Name</td>
+            <td>@product.Price</td>
+            <td>@product.Currency_Name</td>
+            <td>@product.Unit_Name</td>
+            <td>
+                <button title="Modify" class="btn btn-info pull-left clsManageProduct" object-id="@product.ID" object-mode="M">
+                    <span class="glyphicon glyphicon-edit"></span>
+                </button>
+                <button title="Delete" class="btn btn-info pull-left clsManageProduct" object-id="@product.ID" object-mode="D">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </td>
+        </tr>
+
+        }
+        @if (Model.Count == 0)
+        {
+            <tr class="clsNoProductRecords" style="text-align:center;">
+                <td colspan="10">No Product Found</td>
+            </tr>
+        }
+        else
+        {
+            <tr class="clsNoProductRecords" style="text-align:center; display:none;">
+                <td colspan="10">No Product Found</td>
+            </tr>
+        }
+    </tbody>
+</table>

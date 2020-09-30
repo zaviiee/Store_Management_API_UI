@@ -1,0 +1,5 @@
+﻿$(function () {
+
+    MainController.HideLoading();
+
+});
