@@ -22,16 +22,6 @@ namespace StoreManagementAPI
 
             // e.g. container.RegisterType<ITestService, TestService>();
 
-            //container.RegisterType<ICategoryRepository, CategoryRepository>();
-            //container.RegisterType<ICurrencyRepository, CurrencyRepository>();
-            //container.RegisterType<IUnitRepository, UnitRepository>();
-            //container.RegisterType<IProductRepository, ProductRepository>();
-            //container.RegisterType<ICategory, Category>();
-            //container.RegisterType<IUnit, Unit>();
-            //container.RegisterType<ICurrency, Currency>();
-            //container.RegisterType<IProduct, Product>();
-
-
             config.DependencyResolver = new UnityResolver(UnityConfig.container);
             // Web API routes
             config.MapHttpAttributeRoutes();

@@ -19,15 +19,6 @@ namespace StoreManagementAPI
 
             // e.g. container.RegisterType<ITestService, TestService>();
 
-            //container.RegisterType<ICategoryRepository, CategoryRepository>();
-            //container.RegisterType<ICurrencyRepository, CurrencyRepository>();
-            //container.RegisterType<IUnitRepository, UnitRepository>();
-            //container.RegisterType<ICategoryRepository, ProductRepository>(); 
-            //container.RegisterType<ICategory, Category>();
-            //container.RegisterType<IUnit, Unit>();
-            //container.RegisterType<ICurrency, Currency>();
-            //container.RegisterType<ICategory, Product>();
-
 
             container.RegisterType<ICategoryRepository, CategoryRepository>();
             container.RegisterType<ICurrencyRepository, CurrencyRepository>();
