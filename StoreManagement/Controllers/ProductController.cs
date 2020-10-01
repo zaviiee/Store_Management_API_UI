@@ -6,6 +6,9 @@ using System.Web.Mvc;
 
 namespace StoreManagement.Controllers
 {
+    /// <summary>
+    /// Handle Product UI
+    /// </summary>
     public class ProductController : Controller
     {
         public ActionResult _Product()

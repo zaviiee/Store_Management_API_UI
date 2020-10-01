@@ -8,6 +8,9 @@ using System.Web.Http;
 
 namespace StoreManagementAPI.Controllers
 {
+    /// <summary>
+    /// Handle Operations on Currency
+    /// </summary>
     public class CurrencyController : ApiController
     {
         private readonly ICurrencyRepository _repo;
@@ -16,6 +19,10 @@ namespace StoreManagementAPI.Controllers
             _repo = currencyRepository;
         }
 
+        /// <summary>
+        /// Get all currencies
+        /// </summary>
+        /// <returns>List of currencies</returns>
         public List<Currency> GetAll()
         {
             return _repo.GetAll();

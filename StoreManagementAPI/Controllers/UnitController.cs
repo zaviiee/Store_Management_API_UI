@@ -8,6 +8,9 @@ using System.Web.Http;
 
 namespace StoreManagementAPI.Controllers
 {
+    /// <summary>
+    /// Handle Operations on Unit
+    /// </summary>
     public class UnitController : ApiController
     {
         private readonly IUnitRepository _repo;
@@ -16,6 +19,10 @@ namespace StoreManagementAPI.Controllers
             _repo = unitRepository;
         }
 
+        /// <summary>
+        /// Get all Units
+        /// </summary>
+        /// <returns>List of units</returns>
         public List<Unit> GetAll()
         {
             return _repo.GetAll();

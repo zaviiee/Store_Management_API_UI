@@ -6,6 +6,9 @@ using System.Web.Mvc;
 
 namespace StoreManagement.Controllers
 {
+    /// <summary>
+    /// Handle Category UI
+    /// </summary>
     public class CategoryController : Controller
     {
         // GET: Category
