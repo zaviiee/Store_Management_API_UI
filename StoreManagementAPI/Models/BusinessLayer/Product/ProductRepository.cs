@@ -12,11 +12,9 @@ namespace StoreManagementAPI.Models.BusinessLayer
 {
     public class ProductRepository : IProductRepository
     {
-        private readonly IUnityContainer container;
-
         public ProductRepository()
         {
-            container = WebApiConfig.container;
+
         }
         public bool Add(Product obj)
         {

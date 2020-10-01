@@ -12,11 +12,8 @@ namespace StoreManagementAPI.Models.BusinessLayer
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private readonly IUnityContainer container;
-
         public CategoryRepository()
         {
-            container = WebApiConfig.container;
         }
 
         public bool Add(Category obj)
@@ -60,7 +57,7 @@ namespace StoreManagementAPI.Models.BusinessLayer
 
         public Category GetByID(int ID)
         {
-            Category category = container.Resolve<Category>();
+            Category category = new Category();
 
             using (var db = new StoreDBEntities())
             {

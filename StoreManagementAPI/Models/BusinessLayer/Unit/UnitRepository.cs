@@ -11,11 +11,9 @@ namespace StoreManagementAPI.Models.BusinessLayer
 {
     public class UnitRepository : IUnitRepository
     {
-        private readonly IUnityContainer container;
-
+        
         public UnitRepository()
         {
-            container = WebApiConfig.container;
         }
         public List<Unit> GetAll()
         {

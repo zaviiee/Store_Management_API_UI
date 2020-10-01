@@ -106,7 +106,7 @@
                         Category
                     </td>
                     <td>
-                        @Html.DropDownListFor(x => x.Category_ID, Model.Categories, new { @class = "form-control" })
+                        @Html.DropDownListFor(x => x.Category_ID, Model.Categories, "Select Category", new { @class = "form-control" })
                     </td>
                 </tr>
                 <tr>
@@ -136,7 +136,7 @@
                         Currency
                     </td>
                     <td>
-                        @Html.DropDownListFor(x => x.Currency_ID, Model.Currencies, new { @class = "form-control" })
+                        @Html.DropDownListFor(x => x.Currency_ID, Model.Currencies, "Select Currency", new { @class = "form-control" })
                     </td>
                 </tr>
                 <tr>
@@ -151,7 +151,7 @@
                         Unit
                     </td>
                     <td>
-                        @Html.DropDownListFor(x => x.Unit_ID, Model.Units, new { @class = "form-control" })
+                        @Html.DropDownListFor(x => x.Unit_ID, Model.Units, "Select Unit",  new { @class = "form-control" })
                     </td>
                 </tr>
                 <tr>

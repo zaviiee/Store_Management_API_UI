@@ -14,11 +14,12 @@ namespace StoreManagementAPI
     {
         void Application_Start(object sender, EventArgs e)
         {
+
+            UnityConfig.RegisterComponents();
             // Code that runs on application startup
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            UnityConfig.RegisterComponents();
 
         }
     }
