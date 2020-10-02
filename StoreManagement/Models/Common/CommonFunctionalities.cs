@@ -37,8 +37,12 @@ namespace StoreManagement.Models.Common
             var request = new RestRequest(urlAction, M);
             request.RequestFormat = DataFormat.Json;
             var x = restClient.Execute(request);
-
-            return JsonConvert.DeserializeObject<T>(x.Content);
+            var obj = JsonConvert.DeserializeObject<T>(x.Content);
+            if (obj == null)
+            {
+                throw new Exception("Web API - No response from Web API");
+            }
+            return obj;
         }
     }
 }

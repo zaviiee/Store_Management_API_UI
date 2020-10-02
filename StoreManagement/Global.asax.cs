@@ -1,3 +1,4 @@
+using StoreManagement.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,9 @@ namespace StoreManagement
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            // Calling Global action filter
+            GlobalFilters.Filters.Add(new StoreErrorHandling());
         }
+
     }
 }
